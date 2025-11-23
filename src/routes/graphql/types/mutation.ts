@@ -6,6 +6,7 @@ import { PostType } from './post.js';
 import { ProfileType } from './profile.js';
 import { UserType } from './user.js';
 import { UUIDType } from './uuid.js';
+import { mutationResolvers } from '../resolvers/mutation.resolver.js';
 
 export const MutationsType = new GraphQLObjectType({
   name: 'Mutations',
@@ -17,6 +18,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(CreateUserInput),
         },
       },
+      resolve: mutationResolvers.createUser,
     },
     createProfile: {
       type: new GraphQLNonNull(ProfileType),
@@ -25,6 +27,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(CreateProfileInput),
         },
       },
+      resolve: mutationResolvers.createProfile,
     },
     createPost: {
       type: new GraphQLNonNull(PostType),
@@ -33,6 +36,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(CreatePostInput),
         },
       },
+      resolve: mutationResolvers.createPost,
     },
     changePost: {
       type: new GraphQLNonNull(PostType),
@@ -44,6 +48,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(ChangePostInput),
         },
       },
+      resolve: mutationResolvers.changePost,
     },
     changeProfile: {
       type: new GraphQLNonNull(ProfileType),
@@ -55,6 +60,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(ChangeProfileInput),
         },
       },
+      resolve: mutationResolvers.changeProfile,
     },
     changeUser: {
       type: new GraphQLNonNull(UserType),
@@ -66,6 +72,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(ChangeUserInput),
         },
       },
+      resolve: mutationResolvers.changeUser,
     },
     deleteUser: {
       type: new GraphQLNonNull(GraphQLString),
@@ -74,6 +81,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(UUIDType),
         },
       },
+      resolve: mutationResolvers.deleteUser,
     },
     deletePost: {
       type: new GraphQLNonNull(GraphQLString),
@@ -82,6 +90,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(UUIDType),
         },
       },
+      resolve: mutationResolvers.deletePost,
     },
     deleteProfile: {
       type: new GraphQLNonNull(GraphQLString),
@@ -90,6 +99,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(UUIDType),
         },
       },
+      resolve: mutationResolvers.deleteProfile,
     },
     subscribeTo: {
       type: new GraphQLNonNull(GraphQLString),
@@ -101,6 +111,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(UUIDType),
         },
       },
+      resolve: mutationResolvers.subscribeTo,
     },
     unsubscribeFrom: {
       type: new GraphQLNonNull(GraphQLString),
@@ -112,6 +123,7 @@ export const MutationsType = new GraphQLObjectType({
           type: new GraphQLNonNull(UUIDType),
         },
       },
+      resolve: mutationResolvers.unsubscribeFrom,
     },
   }),
 });

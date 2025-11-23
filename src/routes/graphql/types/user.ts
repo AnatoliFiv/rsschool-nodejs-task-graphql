@@ -9,6 +9,7 @@ import {
 import { UUIDType } from './uuid.js';
 import { PostType } from './post.js';
 import { ProfileType } from './profile.js';
+import { userResolvers } from '../resolvers/user.resolver.js';
 
 export const UserType = new GraphQLObjectType({
   name: 'User',
@@ -24,15 +25,19 @@ export const UserType = new GraphQLObjectType({
     },
     profile: {
       type: ProfileType,
+      resolve: userResolvers.profile,
     },
     posts: {
       type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(PostType))),
+      resolve: userResolvers.posts,
     },
     userSubscribedTo: {
       type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(UserType))),
+      resolve: userResolvers.userSubscribedTo,
     },
     subscribedToUser: {
       type: new GraphQLNonNull(new GraphQLList(new GraphQLNonNull(UserType))),
+      resolve: userResolvers.subscribedToUser,
     },
   }),
 });

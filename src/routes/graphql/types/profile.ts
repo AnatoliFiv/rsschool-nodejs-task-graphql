@@ -7,6 +7,7 @@ import {
 } from 'graphql';
 import { UUIDType } from './uuid.js';
 import { MemberTypeIdEnum, MemberTypeType } from './member-type.js';
+import { profileResolvers } from '../resolvers/profile.resolver.js';
 
 export const ProfileType = new GraphQLObjectType({
   name: 'Profile',
@@ -22,6 +23,7 @@ export const ProfileType = new GraphQLObjectType({
     },
     memberType: {
       type: new GraphQLNonNull(MemberTypeType),
+      resolve: profileResolvers.memberType,
     },
   }),
 });
