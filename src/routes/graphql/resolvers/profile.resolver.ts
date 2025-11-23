@@ -11,8 +11,6 @@ export const profileResolvers: {
     context: Context,
     _info: GraphQLResolveInfo,
   ) => {
-    return context.prisma.memberType.findUnique({
-      where: { id: parent.memberTypeId },
-    });
+    return context.loaders.memberTypes.load(parent.memberTypeId);
   },
 };

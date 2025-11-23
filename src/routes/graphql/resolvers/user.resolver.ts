@@ -14,9 +14,7 @@ export const userResolvers: {
     context: Context,
     _info: GraphQLResolveInfo,
   ) => {
-    return context.prisma.profile.findUnique({
-      where: { userId: parent.id },
-    });
+    return context.loaders.profiles.load(parent.id);
   },
 
   posts: async (
@@ -25,9 +23,7 @@ export const userResolvers: {
     context: Context,
     _info: GraphQLResolveInfo,
   ) => {
-    return context.prisma.post.findMany({
-      where: { authorId: parent.id },
-    });
+    return context.loaders.posts.load(parent.id);
   },
 
   userSubscribedTo: async (
@@ -36,11 +32,7 @@ export const userResolvers: {
     context: Context,
     _info: GraphQLResolveInfo,
   ) => {
-    const relations = await context.prisma.subscribersOnAuthors.findMany({
-      where: { subscriberId: parent.id },
-      include: { author: true },
-    });
-    return relations.map((r) => r.author);
+    return context.loaders.userSubscribedTo.load(parent.id);
   },
 
   subscribedToUser: async (
@@ -49,10 +41,6 @@ export const userResolvers: {
     context: Context,
     _info: GraphQLResolveInfo,
   ) => {
-    const relations = await context.prisma.subscribersOnAuthors.findMany({
-      where: { authorId: parent.id },
-      include: { subscriber: true },
-    });
-    return relations.map((r) => r.subscriber);
+    return context.loaders.subscribedToUser.load(parent.id);
   },
 };
